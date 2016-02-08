@@ -8,41 +8,75 @@ Generic Field API for PHP7
 - Configuration examples
 - Utility class for creating and getting configured fields
 
+## API
+
+Create API and set storage:
+```
+$api = new \BackTo95\Fields\Api();
+$storage = new \BackTo95\Storage\FileStorage('data/entities');
+$api->setStorage($storage);
+```
+Create fields:
+```
+$title = (new Text(['name' => 'title', 'label' => 'Title']))->setRequired(true);
+$description = new Textarea(['name' => 'description', 'label' => 'Description']);
+```
+Create EntityConfiguration with fields:
+```
+$track_configuration = new EntityConfiguration([
+    'name' => 'track',
+    'description' => 'Track represents musical track made with tracker software',
+    'fields' => [$title, $description],
+]);
+```
+Store the created EntityConfiguration:
+```
+$api->storeEntityConfiguration($track_configuration);
+```
+Get stored EntityConfiguration by name:
+```
+$api->getEntityConfiguration('track');
+```
+
 ## Content type / Entity / Model
 
 This describes some entity like Album, User, Post etc.
 
 Entity needs flexible way to have CRUD operations and way to store them.
 
-## Configuration
+## Configuration data
 
 Example: track (as in music)
 
 ````PHP
-'track' = [
-    'artist' => [
-        'field' => 'text',
-        'required' => true,
-    ],
-    'title' => [
-        'field' => 'text',
-        'required' => true,
-    ],
-    'description' => [
-        'field' => 'textarea',
-        'required' => false,
-    ],
-    'cover' => [
-        'field' => 'image',
-        'required' => false,
-    ],
-    'genre' => [
-        'field' => 'tags',
-        'required' => true,
-        'settings' => [
-            'min' => 1
-        ]
-    ],
+$configuration = [
+    'name' => 'track',
+    'description' => '',
+    'fields' => [
+        'artist' => [
+            'field' => 'text',
+            'required' => true,
+        ],
+        'title' => [
+            'field' => 'text',
+            'required' => true,
+        ],
+        'description' => [
+            'field' => 'textarea',
+            'required' => false,
+        ],
+        'cover' => [
+            'field' => 'image',
+            'required' => false,
+        ],
+        'genre' => [
+            'field' => 'tags',
+            'required' => true,
+            'settings' => [
+                'min' => 1
+            ]
+        ],
+    ]
 ],
 ````
 
