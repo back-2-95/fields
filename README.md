@@ -7,7 +7,7 @@ This library handles only the metadata about entities and fields related to them
 Create API and set storage:
 ```PHP
 $api = new \BackTo95\Fields\Api();
-$storage = new \BackTo95\Storage\FileStorage('data/entities');
+$storage = new \BackTo95\Fields\Storage\FileStorage('data/entities');
 $api->setStorage($storage);
 ```
 Create EntityConfiguration with fields:
@@ -15,7 +15,10 @@ Create EntityConfiguration with fields:
 $track_configuration = new \BackTo95\Fields\Entity\EntityConfiguration([
     'name' => 'track',
     'description' => 'Track represents musical track made with tracker software',
-    'fields' => ['title' => [...], 'description' => [...]],
+    'fields' => [
+        'title' => [...],
+        'description' => [...],
+    ],
 ]);
 ```
 Store the created EntityConfiguration:
@@ -26,12 +29,6 @@ Get stored EntityConfiguration by name:
 ```PHP
 $api->getEntityConfiguration('track');
 ```
-
-## Content type / Entity / Model
-
-This describes some entity like Album, User, Post etc.
-
-Entity needs flexible way to have CRUD operations and way to store them.
 
 ## EntityConfiguration data
 
