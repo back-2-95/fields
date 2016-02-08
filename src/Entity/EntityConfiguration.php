@@ -57,6 +57,11 @@ class EntityConfiguration
         self::$field_classes = $classes;
     }
 
+    public function hasField(string $name) : bool
+    {
+        return isset($this->fields[$name]);
+    }
+
     protected function setOptions(array $options = [])
     {
         if (isset($options['name'])) {

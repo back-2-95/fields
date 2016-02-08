@@ -58,9 +58,8 @@ class FieldStorageTest extends TestCase
 
         $this->assertFileExists($configuration_file);
         $this->assertEquals(EntityConfiguration::class, get_class($configuration));
-        //$this->assertArrayHasKey('fields', $configuration);
-        //$this->assertEquals($entity_name, $configuration['name']);
-        //$this->assertEquals('text', $configuration['fields']['title']['field']);
+        $this->assertEquals($entity_name, $configuration->getName());
+        $this->assertTrue($configuration->hasField('title'));
     }
 
     public function testAddFieldToEntityConfiguration()
@@ -69,8 +68,7 @@ class FieldStorageTest extends TestCase
         $some_field = new Textarea(['name' => 'some_field', 'label' => 'Additional information']);
 
         $configuration->addField($some_field);
-        //$field_names = $configuration->getFieldNames();print_r($field_names);
-        //$this->assert('some_field', $field_names, var_dump($field_names));
+        $this->assertTrue($configuration->hasField('some_field'));
     }
 
     protected function getExampleConfiguration()
