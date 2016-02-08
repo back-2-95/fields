@@ -25,6 +25,7 @@ abstract class Field extends ArrayObject implements FieldInterface
     public function getArrayCopy()
     {
         return [
+            'name' => $this->getName(),
             'field' => $this->getType(),
             'options' => $this->getOptions(),
             'required' => $this->isRequired(),
@@ -62,6 +63,10 @@ abstract class Field extends ArrayObject implements FieldInterface
 
     public function setOptions(array $options) : self
     {
+        if (isset($options['name'])) {
+            $this->name = (string) $options['name'];
+        }
+
         if (isset($options['label'])) {
             $this->options['label'] = (string) $options['label'];
         }

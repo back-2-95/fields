@@ -2,18 +2,24 @@
 
 namespace BackTo95\Fields\Entity;
 
-use ArrayObject;
 use BackTo95\Fields\Field\Field;
 
-class EntityConfiguration extends ArrayObject
+class EntityConfiguration
 {
     protected $name;
     protected $description;
-    protected $fields = [];
+    protected $fields;
+    protected static $field_classes = [];
 
     public function __construct(array $options = [])
     {
         $this->setOptions($options);
+    }
+
+    public function addField(Field $field) : self
+    {
+        $this->fields[$field->getName()] = $field;
+        return $this;
     }
 
     public function getArrayCopy() : array
@@ -27,14 +33,11 @@ class EntityConfiguration extends ArrayObject
         }
 
         /**
-         * @var string $field_instance
          * @var Field $field
          */
-        foreach ($this->fields as $field_instance => $field) {
-            $this->fields[$field_instance] = $field->getArrayCopy();
+        foreach ($this->fields as $field) {
+            $array['fields'][$field->getName()] = $field->getArrayCopy();
         }
-
-        $array['fields'] = $this->fields;
 
         return $array;
     }
@@ -49,6 +52,11 @@ class EntityConfiguration extends ArrayObject
         return $this->name;
     }
 
+    public static function setFieldClasses(array $classes)
+    {
+        self::$field_classes = $classes;
+    }
+
     protected function setOptions(array $options = [])
     {
         if (isset($options['name'])) {
@@ -60,7 +68,14 @@ class EntityConfiguration extends ArrayObject
         }
 
         if (isset($options['fields']) && is_array($options['fields'])) {
-            $this->fields = $options['fields'];
+            foreach ($options['fields'] as $field) {
+                if (is_array($field)) {
+                    $class = self::$field_classes[$field['field']];
+                    $field = new $class($field);
+                }
+
+                $this->addField($field);
+            }
         }
     }
 }

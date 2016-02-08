@@ -2,6 +2,7 @@
 
 namespace BackTo95Test\Fields;
 
+use ArrayObject;
 use BackTo95\Fields\Entity\EntityConfiguration;
 use BackTo95\Fields\API;
 use BackTo95\Fields\Field\Text;
@@ -38,13 +39,12 @@ class FieldStorageTest extends TestCase
 
     public function testStoreEntityConfiguration()
     {
-        $entity_name = 'track';
         $configuration = $this->getExampleConfiguration();
         $path = $this->storage->getPath();
 
         $this->api->storeEntityConfiguration($configuration);
 
-        $configuration_file = sprintf('%s/%s.php', $path, $entity_name);
+        $configuration_file = sprintf('%s/%s.php', $path, $configuration->getName());
         $this->assertFileExists($configuration_file);
     }
 
@@ -63,18 +63,25 @@ class FieldStorageTest extends TestCase
         //$this->assertEquals('text', $configuration['fields']['title']['field']);
     }
 
+    public function testAddFieldToEntityConfiguration()
+    {
+        $configuration = $this->getExampleConfiguration();
+        $some_field = new Textarea(['name' => 'some_field', 'label' => 'Additional information']);
+
+        $configuration->addField($some_field);
+        //$field_names = $configuration->getFieldNames();print_r($field_names);
+        //$this->assert('some_field', $field_names, var_dump($field_names));
+    }
+
     protected function getExampleConfiguration()
     {
-        $title = (new Text(['label' => 'Title']))->setRequired(true);
-        $description = (new Textarea(['label' => 'Description']));
+        $title = (new Text(['name' => 'title', 'label' => 'Title']))->setRequired(true);
+        $description = new Textarea(['name' => 'description', 'label' => 'Description']);
 
         return new EntityConfiguration([
             'name' => 'track',
             'description' => 'Track represents musical track made with tracker software',
-            'fields' => [
-                'title' => $title,
-                'description' => $description,
-            ]
+            'fields' => [$title, $description],
         ]);
     }
 }
