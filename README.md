@@ -1,12 +1,6 @@
 # php-crud-fields
-Generic Field API for PHP7
-
-## Fields
-
-- Interface and abstract class for field
-- Basic field types as classes
-- Configuration examples
-- Utility class for creating and getting configured fields
+Generic Field API for PHP7.
+This library handles only the metadata about entities and fields related to them.
 
 ## API
 
@@ -44,32 +38,37 @@ This describes some entity like Album, User, Post etc.
 
 Entity needs flexible way to have CRUD operations and way to store them.
 
-## Configuration data
+## EntityConfiguration data
 
-Example: track (as in music)
+Example entity: track (as in music)
 
 ````PHP
-$configuration = [
+[
     'name' => 'track',
-    'description' => '',
+    'description' => 'Track represents musical track made with tracker software',
     'fields' => [
         'artist' => [
+            'name' => 'artist',
             'field' => 'text',
             'required' => true,
         ],
         'title' => [
+            'name' => 'title',
             'field' => 'text',
             'required' => true,
         ],
         'description' => [
+            'name' => 'description',
             'field' => 'textarea',
             'required' => false,
         ],
         'cover' => [
+            'name' => 'cover',
             'field' => 'image',
             'required' => false,
         ],
         'genre' => [
+            'name' => 'genre',
             'field' => 'tags',
             'required' => true,
             'settings' => [
@@ -105,12 +104,19 @@ By default this adapter uses path `data/entities` for storing configurations.
 
 ### Text ###
 
-Text...
+```
+$title = (new Text(['name' => 'title', 'label' => 'Title']))->setRequired(true);
+```
 
-### Select ###
+### Textarea ###
 
-Select...
+```
+$description = new Textarea(['name' => 'description', 'label' => 'Description']);
+```
 
-### Image
+### Image ###
 
 Image is a field type which is input type=file element but having attributes and functionality related to images.
+
+### Tags ###
+

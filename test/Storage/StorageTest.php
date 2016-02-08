@@ -4,8 +4,6 @@ namespace BackTo95Test\Fields;
 
 use BackTo95\Fields\Entity\EntityConfiguration;
 use BackTo95\Fields\API;
-use BackTo95\Fields\Field\Text;
-use BackTo95\Fields\Field\Textarea;
 use BackTo95\Fields\Storage\FileStorage;
 use BackTo95\Fields\Storage\StorageInterface;
 use PHPUnit_Framework_TestCase as TestCase;
@@ -61,24 +59,39 @@ class StorageTest extends TestCase
         $this->assertTrue($configuration->hasField('title'));
     }
 
-    public function testAddFieldToEntityConfiguration()
-    {
-        $configuration = $this->getExampleConfiguration();
-        $some_field = new Textarea(['name' => 'some_field', 'label' => 'Additional information']);
-
-        $configuration->addField($some_field);
-        $this->assertTrue($configuration->hasField('some_field'));
-    }
-
     protected function getExampleConfiguration()
     {
-        $title = (new Text(['name' => 'title', 'label' => 'Title']))->setRequired(true);
-        $description = new Textarea(['name' => 'description', 'label' => 'Description']);
-
         return new EntityConfiguration([
             'name' => 'track',
             'description' => 'Track represents musical track made with tracker software',
-            'fields' => [$title, $description],
+            'fields' => [
+                'artist' => [
+                    'name' => 'artist',
+                    'widget' => 'text',
+                    'required' => true,
+                ],
+                'title' => [
+                    'name' => 'title',
+                    'widget' => 'text',
+                    'required' => true,
+                ],
+                'description' => [
+                    'name' => 'description',
+                    'widget' => 'textarea',
+                ],
+                'cover' => [
+                    'name' => 'cover',
+                    'widget' => 'image',
+                ],
+                'genre' => [
+                    'name' => 'genre',
+                    'widget' => 'tags',
+                    'required' => true,
+                    'settings' => [
+                        'min' => 1
+                    ]
+                ],
+            ]
         ]);
     }
 }
