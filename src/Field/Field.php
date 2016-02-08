@@ -1,12 +1,14 @@
 <?php
 
-namespace BackTo95\MongoDbCrud\Field;
+namespace BackTo95\Fields\Field;
 
 abstract class Field implements FieldInterface
 {
     protected $attributes = [];
 
     protected $name;
+
+    protected $settings;
 
     protected $type;
 
@@ -18,6 +20,11 @@ abstract class Field implements FieldInterface
     public function getName() : string
     {
         return $this->name;
+    }
+
+    public function getSettings() : array
+    {
+        return $this->settings;
     }
 
     public function getType() : string

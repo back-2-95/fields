@@ -1,6 +1,6 @@
 <?php
 
-namespace BackTo95\MongoDbCrud\Field;
+namespace BackTo95\Fields\Field;
 
 interface FieldInterface
 {

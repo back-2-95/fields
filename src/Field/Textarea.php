@@ -2,7 +2,7 @@
 
 namespace BackTo95\Fields\Field;
 
-class Text extends Field
+class Textarea extends Field
 {
 
 }

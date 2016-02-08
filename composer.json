@@ -1,23 +1,23 @@
 {
     "name": "back-2-95/php-crud-fields",
-    "description": "CRUD Field API for PHP7",
+    "description": "CRUD Fields API for PHP7",
     "type": "library",
+    "require": {
+        "php": "^7.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "^5.2"
     },
     "homepage": "https://github.com/back-2-95/php-crud-fields",
     "autoload": {
         "psr-4": {
-            "BackTo95\\MongoDbCrud\\": "src/"
+            "BackTo95\\Fields\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "BackTo95Test\\MongoDbCrud\\": "test/"
+            "BackTo95Test\\Fields\\": "test/"
         }
-    },
-    "require": {
-        "php": "^7.0"
     },
     "authors": [
         {
