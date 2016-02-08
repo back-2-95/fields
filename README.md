@@ -5,18 +5,18 @@ This library handles only the metadata about entities and fields related to them
 ## API
 
 Create API and set storage:
-```
+```PHP
 $api = new \BackTo95\Fields\Api();
 $storage = new \BackTo95\Storage\FileStorage('data/entities');
 $api->setStorage($storage);
 ```
 Create fields:
-```
+```PHP
 $title = (new Text(['name' => 'title', 'label' => 'Title']))->setRequired(true);
 $description = new Textarea(['name' => 'description', 'label' => 'Description']);
 ```
 Create EntityConfiguration with fields:
-```
+```PHP
 $track_configuration = new EntityConfiguration([
     'name' => 'track',
     'description' => 'Track represents musical track made with tracker software',
@@ -24,11 +24,11 @@ $track_configuration = new EntityConfiguration([
 ]);
 ```
 Store the created EntityConfiguration:
-```
+```PHP
 $api->storeEntityConfiguration($track_configuration);
 ```
 Get stored EntityConfiguration by name:
-```
+```PHP
 $api->getEntityConfiguration('track');
 ```
 
@@ -83,7 +83,6 @@ Example entity: track (as in music)
 
 This library should just return entities and their field configurations which can be then used by some other component to store, render, validate etc.
 
-
 ## Rendering ##
 
 Rendering is not responsibility of this class.
@@ -99,24 +98,3 @@ Storing this configuration is not part of this library e.g. https://github.com/b
 This library provides interface for Storage adapters and file based solution as an example.
 
 By default this adapter uses path `data/entities` for storing configurations.
-
-## Examples of the fields ##
-
-### Text ###
-
-```
-$title = (new Text(['name' => 'title', 'label' => 'Title']))->setRequired(true);
-```
-
-### Textarea ###
-
-```
-$description = new Textarea(['name' => 'description', 'label' => 'Description']);
-```
-
-### Image ###
-
-Image is a field type which is input type=file element but having attributes and functionality related to images.
-
-### Tags ###
-
