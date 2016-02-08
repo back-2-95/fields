@@ -2,16 +2,15 @@
 
 namespace BackTo95Test\Fields;
 
-use ArrayObject;
 use BackTo95\Fields\Entity\EntityConfiguration;
 use BackTo95\Fields\API;
 use BackTo95\Fields\Field\Text;
 use BackTo95\Fields\Field\Textarea;
-use BackTo95\Fields\FieldStorage\FileStorage;
-use BackTo95\Fields\FieldStorage\StorageInterface;
+use BackTo95\Fields\Storage\FileStorage;
+use BackTo95\Fields\Storage\StorageInterface;
 use PHPUnit_Framework_TestCase as TestCase;
 
-class FieldStorageTest extends TestCase
+class StorageTest extends TestCase
 {
     /** @var API Fields API */
     protected $api;

@@ -1,6 +1,6 @@
 <?php
 
-namespace BackTo95\Fields\FieldStorage;
+namespace BackTo95\Fields\Storage;
 
 use BackTo95\Fields\Entity\EntityConfiguration;
 use Exception;

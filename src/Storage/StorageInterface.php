@@ -1,6 +1,6 @@
 <?php
 
-namespace BackTo95\Fields\FieldStorage;
+namespace BackTo95\Fields\Storage;
 
 use BackTo95\Fields\Entity\EntityConfiguration;
 
@@ -9,7 +9,7 @@ use BackTo95\Fields\Entity\EntityConfiguration;
  *
  * Implement this interface to create alternative storage for Field configurations
  *
- * @package BackTo95\Fields\FieldStorage
+ * @package BackTo95\Fields\Storage
  */
 interface StorageInterface
 {
