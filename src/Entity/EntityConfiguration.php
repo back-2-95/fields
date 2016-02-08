@@ -3,6 +3,7 @@
 namespace BackTo95\Fields\Entity;
 
 use ArrayObject;
+use BackTo95\Fields\Field\Field;
 
 class EntityConfiguration extends ArrayObject
 {
@@ -19,12 +20,21 @@ class EntityConfiguration extends ArrayObject
     {
         $array = [
             'name' => $this->getName(),
-            'fields' => $this->fields,
         ];
 
         if ($this->getDescription() != '') {
             $array['description'] = $this->getDescription();
         }
+
+        /**
+         * @var string $field_instance
+         * @var Field $field
+         */
+        foreach ($this->fields as $field_instance => $field) {
+            $this->fields[$field_instance] = $field->getArrayCopy();
+        }
+
+        $array['fields'] = $this->fields;
 
         return $array;
     }

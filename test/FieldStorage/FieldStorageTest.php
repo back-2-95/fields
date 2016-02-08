@@ -72,8 +72,8 @@ class FieldStorageTest extends TestCase
             'name' => 'track',
             'description' => 'Track represents musical track made with tracker software',
             'fields' => [
-                'title' => $title->getArrayCopy(),
-                'description' => $description->getArrayCopy(),
+                'title' => $title,
+                'description' => $description,
             ]
         ]);
     }
