@@ -2,6 +2,7 @@
 
 namespace BackTo95\Fields\FieldStorage;
 
+use BackTo95\Fields\Entity\EntityConfiguration;
 use Exception;
 
 class FileStorage implements StorageInterface
@@ -26,16 +27,17 @@ class FileStorage implements StorageInterface
      * Get configuration for wanted entity
      *
      * @param string $entity Entity name
-     * @return array Entity configuration
+     * @return EntityConfiguration Entity configuration
      * @throws Exception
      */
-    public function getEntityConfiguration(string $entity) : array
+    public function getEntityConfiguration(string $entity) : EntityConfiguration
     {
         $configuration_file = sprintf('%s/%s.php', $this->getPath(), $entity);
 
         if (file_exists($configuration_file)) {
             /** @noinspection PhpIncludeInspection */
-            return include $configuration_file;
+            $configuration = include $configuration_file;
+            return new EntityConfiguration($configuration);
         }
         else {
             throw new Exception(sprintf('Configuration file %s does not exist.', $configuration_file));
@@ -59,18 +61,17 @@ class FileStorage implements StorageInterface
     /**
      * Store configuration for the entity
      *
-     * @param string $entity Entity name
-     * @param array $configuration Configuration
+     * @param EntityConfiguration $configuration Configuration
      * @return bool Success
      * @throws Exception
      */
-    public function storeEntityConfiguration(string $entity, array $configuration) : bool
+    public function storeEntityConfiguration(EntityConfiguration $configuration) : bool
     {
         $path = $this->getPath();
 
         if (is_writable($path)) {
-            $configuration_file = sprintf('%s/%s.php', $path, $entity);
-            $result = file_put_contents($configuration_file, '<?php return ' . var_export($configuration, true) . ';' . PHP_EOL);
+            $configuration_file = sprintf('%s/%s.php', $path, $configuration->getName());
+            $result = file_put_contents($configuration_file, '<?php return ' . var_export($configuration->getArrayCopy(), true) . ';' . PHP_EOL);
             return ($result > 0);
         }
         else {

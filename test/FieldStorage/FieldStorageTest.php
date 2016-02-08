@@ -1,8 +1,9 @@
 <?php
 
-namespace BackTo95Test\MongoDbCrud;
+namespace BackTo95Test\Fields;
 
-use BackTo95\Fields\Field\API;
+use BackTo95\Fields\Entity\EntityConfiguration;
+use BackTo95\Fields\API;
 use BackTo95\Fields\Field\Text;
 use BackTo95\Fields\Field\Textarea;
 use BackTo95\Fields\FieldStorage\FileStorage;
@@ -41,7 +42,7 @@ class FieldStorageTest extends TestCase
         $configuration = $this->getExampleConfiguration();
         $path = $this->storage->getPath();
 
-        $this->api->storeEntityConfiguration($entity_name, $configuration);
+        $this->api->storeEntityConfiguration($configuration);
 
         $configuration_file = sprintf('%s/%s.php', $path, $entity_name);
         $this->assertFileExists($configuration_file);
@@ -56,10 +57,10 @@ class FieldStorageTest extends TestCase
         $configuration = $this->api->getEntityConfiguration($entity_name);
 
         $this->assertFileExists($configuration_file);
-        $this->assertEquals(gettype($configuration), 'array');
-        $this->assertArrayHasKey('fields', $configuration);
-        $this->assertEquals($entity_name, $configuration['name']);
-        $this->assertEquals('text', $configuration['fields']['title']['field']);
+        $this->assertEquals(EntityConfiguration::class, get_class($configuration));
+        //$this->assertArrayHasKey('fields', $configuration);
+        //$this->assertEquals($entity_name, $configuration['name']);
+        //$this->assertEquals('text', $configuration['fields']['title']['field']);
     }
 
     protected function getExampleConfiguration()
@@ -67,12 +68,13 @@ class FieldStorageTest extends TestCase
         $title = (new Text(['label' => 'Title']))->setRequired(true);
         $description = (new Textarea(['label' => 'Description']));
 
-        return [
+        return new EntityConfiguration([
             'name' => 'track',
+            'description' => 'Track represents musical track made with tracker software',
             'fields' => [
                 'title' => $title->getArrayCopy(),
                 'description' => $description->getArrayCopy(),
             ]
-        ];
+        ]);
     }
 }
