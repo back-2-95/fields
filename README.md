@@ -10,17 +10,12 @@ $api = new \BackTo95\Fields\Api();
 $storage = new \BackTo95\Storage\FileStorage('data/entities');
 $api->setStorage($storage);
 ```
-Create fields:
-```PHP
-$title = (new Text(['name' => 'title', 'label' => 'Title']))->setRequired(true);
-$description = new Textarea(['name' => 'description', 'label' => 'Description']);
-```
 Create EntityConfiguration with fields:
 ```PHP
-$track_configuration = new EntityConfiguration([
+$track_configuration = new \BackTo95\Fields\Entity\EntityConfiguration([
     'name' => 'track',
     'description' => 'Track represents musical track made with tracker software',
-    'fields' => [$title, $description],
+    'fields' => ['title' => [...], 'description' => [...]],
 ]);
 ```
 Store the created EntityConfiguration:
@@ -49,27 +44,25 @@ Example entity: track (as in music)
     'fields' => [
         'artist' => [
             'name' => 'artist',
-            'field' => 'text',
+            'widget' => 'text',
             'required' => true,
         ],
         'title' => [
             'name' => 'title',
-            'field' => 'text',
+            'widget' => 'text',
             'required' => true,
         ],
         'description' => [
             'name' => 'description',
-            'field' => 'textarea',
-            'required' => false,
+            'widget' => 'textarea',
         ],
         'cover' => [
             'name' => 'cover',
-            'field' => 'image',
-            'required' => false,
+            'widget' => 'image',
         ],
         'genre' => [
             'name' => 'genre',
-            'field' => 'tags',
+            'widget' => 'tags',
             'required' => true,
             'settings' => [
                 'min' => 1
