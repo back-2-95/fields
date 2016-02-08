@@ -4,7 +4,7 @@ namespace BackTo95\Fields\Field;
 
 interface FieldInterface
 {
-    public function getAttributes();
+    public function getOptions();
 
     public function getName();
 

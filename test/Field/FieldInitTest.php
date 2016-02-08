@@ -10,18 +10,23 @@ use BackTo95\Fields\Field\Textarea;
 
 class FieldInitTest extends TestCase
 {
+    protected $field_classes = [];
+
+    public function setUp()
+    {
+        $this->field_classes = [
+            Text::class,
+            Textarea::class,
+        ];
+    }
+
     /**
      * Test all field classes that they implements the FieldInterface and are extended from
      * abstract Field class
      */
     public function testFieldsClassInstanceOf()
     {
-        $field_classes = [
-            Text::class,
-            Textarea::class,
-        ];
-
-        foreach ($field_classes as $class) {
+        foreach ($this->field_classes as $class) {
             $class = new $class;
             $this->assertInstanceOf(FieldInterface::class, $class);
             $this->assertInstanceOf(Field::class, $class);

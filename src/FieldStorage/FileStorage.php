@@ -29,11 +29,12 @@ class FileStorage implements StorageInterface
      * @return array Entity configuration
      * @throws Exception
      */
-    public function getConfiguration(string $entity) : array
+    public function getEntityConfiguration(string $entity) : array
     {
         $configuration_file = sprintf('%s/%s.php', $this->getPath(), $entity);
 
         if (file_exists($configuration_file)) {
+            /** @noinspection PhpIncludeInspection */
             return include $configuration_file;
         }
         else {
@@ -63,7 +64,7 @@ class FileStorage implements StorageInterface
      * @return bool Success
      * @throws Exception
      */
-    public function storeConfiguration(string $entity, array $configuration) : bool
+    public function storeEntityConfiguration(string $entity, array $configuration) : bool
     {
         $path = $this->getPath();
 

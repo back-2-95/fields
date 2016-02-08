@@ -9,14 +9,18 @@ class API
 {
     protected $storage;
 
-    public function getConfiguration(string $entity) : array
+    public function getEntityConfiguration(string $entity) : array
     {
-        return $this->getStorage()->getConfiguration($entity);
+        return $this->getStorage()->getEntityConfiguration($entity);
     }
 
     public function getFields(string $entity) : array
     {
-        $configuration = $this->getConfiguration($entity);
+        $configuration = $this->getEntityConfiguration($entity);
+
+        foreach ($configuration['fields'] as $field_instance => $field) {
+
+        }
     }
 
     public function getStorage() : StorageInterface
@@ -35,8 +39,8 @@ class API
         return $this;
     }
 
-    public function storeConfiguration(string $entity, array $configuration) : bool
+    public function storeEntityConfiguration(string $entity, array $configuration) : bool
     {
-        return $this->getStorage()->storeConfiguration($entity, $configuration);
+        return $this->getStorage()->storeEntityConfiguration($entity, $configuration);
     }
 }
