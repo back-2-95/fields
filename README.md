@@ -2,6 +2,13 @@
 Generic Field API for PHP7.
 This library handles only the metadata about entities and fields related to them.
 
+## TODO
+
+I'll keep this todo list on top until the library is usable.
+
+- Validate and force field data structure. Now they are just arrays of anything.
+- In that structure, try to separate general, form and display related data.
+
 ## API
 
 Create API and set storage:
@@ -79,7 +86,7 @@ Rendering is not responsibility of this class.
 
 ## UI for creating configurations ##
 
-UI is not part of this library. It should be another library which requires this.
+UI is not part of this library. It should be another library which requires and uses this library.
 
 ## Storage ##
 
