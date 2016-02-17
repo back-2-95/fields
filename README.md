@@ -2,6 +2,9 @@
 Generic Field API for PHP7.
 This library handles only the metadata about entities and fields related to them.
 
+
+![Travis CI](https://travis-ci.org/back-2-95/php-crud-fields.svg?branch=master)
+
 ## TODO
 
 I'll keep this todo list on top until the library is usable.
