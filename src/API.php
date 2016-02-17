@@ -19,6 +19,7 @@ class API
     {
         // Use FileStorage as default
         if (!$this->storage) {
+            // TODO set default storage in configuration
             $this->storage = new FileStorage();
         }
 

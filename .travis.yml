@@ -1,0 +1,14 @@
+language:
+  php
+
+php:
+  - 7.0
+
+# set up composer
+before_script:
+  - curl -s https://getcomposer.org/installer | php
+  - php ./composer.phar --no-progress --dev install
+
+# run the phpunit tests
+script:
+  - php ./vendor/bin/phpunit --coverage-text
