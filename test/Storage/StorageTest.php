@@ -67,6 +67,19 @@ class StorageTest extends TestCase
         $this->assertTrue($configuration->hasField('title'));
     }
 
+    public function testGetEntityConfigurationNotFound()
+    {
+        $this->expectException(\Exception::class);
+        $configuration = $this->api->getEntityConfiguration('foobar');
+    }
+
+    public function testSetPathWithConstructor()
+    {
+        $storage = new FileStorage(FileStorage::$default_path);
+        $path = $this->storage->getPath();
+        $this->assertEquals($path, FileStorage::$default_path);
+    }
+
     protected function getExampleConfiguration()
     {
         return new EntityConfiguration([
