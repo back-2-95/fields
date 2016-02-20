@@ -19,7 +19,7 @@ class FileStorage implements StorageInterface
     public function __construct(string $path = '')
     {
         if ($path != '') {
-            $this->path = $path;
+            $this->setPath($path);
         }
     }
 
@@ -52,10 +52,16 @@ class FileStorage implements StorageInterface
     public function getPath() : string
     {
         if (!$this->path) {
-            $this->path = self::$default_path;
+            $this->setPath(self::$default_path);
         }
 
         return $this->path;
+    }
+
+    public function setPath($path) : self
+    {
+        $this->path = $path;
+        return $this;
     }
 
     /**

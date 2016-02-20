@@ -34,6 +34,14 @@ class StorageTest extends TestCase
         $this->assertEquals($path, FileStorage::$default_path);
     }
 
+    public function testDefaultStoragePathNotWritable()
+    {
+        $this->expectException(\Exception::class);
+        $this->storage->setPath('/not/writable/path/i/guess');
+        $configuration = $this->getExampleConfiguration();
+        $this->api->storeEntityConfiguration($configuration);
+    }
+
     public function testStoreEntityConfiguration()
     {
         $configuration = $this->getExampleConfiguration();
