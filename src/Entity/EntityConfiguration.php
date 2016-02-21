@@ -2,6 +2,8 @@
 
 namespace BackTo95\Fields\Entity;
 
+use Exception;
+
 class EntityConfiguration
 {
     /** @var string Name of the entity e.g. "track" */
@@ -83,7 +85,7 @@ class EntityConfiguration
      */
     public function setFields(array $fields) : self
     {
-        $this->fields = $fields;
+        $this->fields = $this->validateFields($fields);
         return $this;
     }
 
@@ -117,5 +119,45 @@ class EntityConfiguration
         if (isset($options['fields']) && is_array($options['fields'])) {
             $this->setFields($options['fields']);
         }
+    }
+
+    /**
+     * Validate fields and their data
+     *
+     * @param array $fields Fields
+     * @return array Validated fields
+     * @throws Exception
+     */
+    protected function validateFields(array $fields) : array
+    {
+        $validated_fields = [];
+        $valid_field_attributes = ['name', 'required', 'widget', 'settings'];
+
+        foreach ($fields as $field) {
+            if (!isset($field['name'])) {
+                throw new Exception("Name is mandatory attribute for a field!");
+            }
+
+            foreach ($field as $attribute => $value) {
+                if (!in_array($attribute, $valid_field_attributes)) {
+                    throw new Exception(sprintf("Field attribute %s is not valid!", $attribute));
+                }
+
+                switch ($attribute) {
+                    case 'required':
+                        $value = (int) $value;
+                        if ($value !== 1) {
+                            throw new Exception(sprintf("Only valid values for required is 1, value of '%s' (%s) was given.", $value, gettype($value)));
+                        }
+
+                        break;
+                }
+                // TODO check if attribute has a validator?
+            }
+
+            $validated_fields[$field['name']] = $field;
+        }
+
+        return $validated_fields;
     }
 }
