@@ -1,5 +1,5 @@
 {
-    "name": "back-2-95/php-crud-fields",
+    "name": "back-2-95/fields",
     "description": "CRUD Fields API for PHP7",
     "type": "library",
     "require": {
