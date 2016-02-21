@@ -15,12 +15,12 @@ trait ExampleEntityConfigurationTrait
                 'artist' => [
                     'name' => 'artist',
                     'widget' => 'text',
-                    'required' => true,
+                    'required' => 1,
                 ],
                 'title' => [
                     'name' => 'title',
                     'widget' => 'text',
-                    'required' => true,
+                    'required' => 1,
                 ],
                 'description' => [
                     'name' => 'description',
@@ -33,7 +33,7 @@ trait ExampleEntityConfigurationTrait
                 'genre' => [
                     'name' => 'genre',
                     'widget' => 'tags',
-                    'required' => true,
+                    'required' => 1,
                     'settings' => [
                         'min' => 1
                     ]

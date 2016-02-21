@@ -145,7 +145,7 @@ class EntityConfiguration
 
                 switch ($attribute) {
                     case 'required':
-                        $value = (int) $value;
+                        $field[$attribute] = (int) $value;
                         if ($value !== 1) {
                             throw new Exception(sprintf("Only valid values for required is 1, value of '%s' (%s) was given.", $value, gettype($value)));
                         }
@@ -157,7 +157,7 @@ class EntityConfiguration
 
             $validated_fields[$field['name']] = $field;
         }
-
+print_r($validated_fields);
         return $validated_fields;
     }
 }

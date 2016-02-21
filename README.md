@@ -52,12 +52,12 @@ Example entity: track (as in music)
         'artist' => [
             'name' => 'artist',
             'widget' => 'text',
-            'required' => true,
+            'required' => 1,
         ],
         'title' => [
             'name' => 'title',
             'widget' => 'text',
-            'required' => true,
+            'required' => 1,
         ],
         'description' => [
             'name' => 'description',
@@ -70,7 +70,7 @@ Example entity: track (as in music)
         'genre' => [
             'name' => 'genre',
             'widget' => 'tags',
-            'required' => true,
+            'required' => 1,
             'settings' => [
                 'min' => 1
             ]
