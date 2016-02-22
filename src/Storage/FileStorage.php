@@ -45,6 +45,22 @@ class FileStorage implements StorageInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function getEntityConfigurations() : array
+    {
+        $configurations = [];
+        $path = $this->getPath();
+        foreach (glob($path .'/*.php') as $filename) {
+            /** @noinspection PhpIncludeInspection */
+            $entity = include $filename;
+            $configurations[$entity['name']] = $entity;
+        }
+
+        return $configurations;
+    }
+
+    /**
      * Get path to configurations
      *
      * @return string Path

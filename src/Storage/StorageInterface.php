@@ -22,6 +22,13 @@ interface StorageInterface
     public function getEntityConfiguration(string $entity) : EntityConfiguration;
 
     /**
+     * Get list of available entity configurations
+     *
+     * @return array List
+     */
+    public function getEntityConfigurations() : array;
+
+    /**
      * Store configuration for given entity
      *
      * @param EntityConfiguration $configuration

@@ -36,6 +36,11 @@ class ApiTest extends TestCase
 
         $configuration_file = sprintf('%s/%s.php', $path, $configuration->getName());
         $this->assertFileExists($configuration_file);
+
+        // TODO why this no workz?
+//        $configuration = $this->getInvalidExampleConfiguration();
+//        $this->expectException(\Exception::class);
+//        $this->api->storeEntityConfiguration($configuration);
     }
 
     public function testGetEntityConfiguration()
@@ -50,5 +55,11 @@ class ApiTest extends TestCase
         $this->assertEquals(EntityConfiguration::class, get_class($configuration));
         $this->assertEquals($entity_name, $configuration->getName());
         $this->assertTrue($configuration->hasField('title'));
+    }
+
+    public function testGetEntityConfigurations()
+    {
+        $configurations = $this->api->getStorage()->getEntityConfigurations();
+        $this->assertArrayHasKey('track', $configurations);
     }
 }

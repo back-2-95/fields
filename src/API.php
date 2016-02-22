@@ -10,6 +10,11 @@ class API
 {
     protected $storage;
 
+    public function getEntityConfigurations() : array
+    {
+        return $this->getStorage()->getEntityConfigurations();
+    }
+
     public function getEntityConfiguration(string $entity) : EntityConfiguration
     {
         return $this->getStorage()->getEntityConfiguration($entity);

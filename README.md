@@ -1,4 +1,5 @@
-# php-crud-fields
+# back-2-95/fields
+
 Generic Field API for PHP7.
 This library handles only the metadata about entities and fields related to them.
 
@@ -51,33 +52,47 @@ Example entity: track (as in music)
     'fields' => [
         'artist' => [
             'name' => 'artist',
-            'widget' => 'text',
+            'form' => [
+                'widget' => 'text',
+                'filters' => ['trim'],
+            ],
             'required' => 1,
         ],
         'title' => [
             'name' => 'title',
-            'widget' => 'text',
+            'form' => [
+                'widget' => 'text',
+            ],
             'required' => 1,
         ],
         'description' => [
             'name' => 'description',
-            'widget' => 'textarea',
+            'form' => [
+                'widget' => 'editor',
+            ],
         ],
         'cover' => [
             'name' => 'cover',
-            'widget' => 'image',
+            'form' => [
+                'widget' => 'image',
+            ],
         ],
         'genre' => [
             'name' => 'genre',
-            'widget' => 'tags',
+            'form' => [
+                'widget' => 'tags',
+                'validators' => [
+                    'min' => 1
+                ],
+            ],
+            'multivalue' => 1,
             'required' => 1,
-            'settings' => [
-                'min' => 1
-            ]
         ],
     ]
 ],
 ````
+
+Notes: widget name can be anything, the implementing library will decide what the widgets are finally. E.g. widget "editor" can be CKeditor, TinyMCE or something else.
 
 ## Output
 
@@ -93,7 +108,7 @@ UI is not part of this library. It should be another library which requires and 
 
 ## Storage ##
 
-Storing this configuration is not part of this library e.g. https://github.com/back-2-95/php-mongodb-crud
+Storing this configuration is not part of this library e.g. https://github.com/back-2-95/fields-mongodb
 
 This library provides interface for Storage adapters and file based solution as an example.
 

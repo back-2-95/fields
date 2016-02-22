@@ -6,6 +6,7 @@ use BackTo95\Fields\API;
 use BackTo95\Fields\Storage\FileStorage;
 use BackTo95\Fields\Storage\StorageInterface;
 use BackTo95Test\Fields\ExampleEntityConfigurationTrait;
+use Exception;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class StorageTest extends TestCase
@@ -38,7 +39,7 @@ class StorageTest extends TestCase
 
     public function testDefaultStoragePathNotWritable()
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $this->storage->setPath('/not/writable/path/i/guess');
         $configuration = $this->getExampleConfiguration();
         $this->api->storeEntityConfiguration($configuration);
@@ -46,7 +47,7 @@ class StorageTest extends TestCase
 
     public function testGetEntityConfigurationNotFound()
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $configuration = $this->api->getEntityConfiguration('foobar');
     }
 

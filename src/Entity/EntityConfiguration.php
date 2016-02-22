@@ -131,7 +131,7 @@ class EntityConfiguration
     protected function validateFields(array $fields) : array
     {
         $validated_fields = [];
-        $valid_field_attributes = ['name', 'required', 'widget', 'settings'];
+        $valid_field_attributes = ['name', 'required', 'form', 'multivalue'];
 
         foreach ($fields as $field) {
             if (!isset($field['name'])) {
@@ -157,7 +157,7 @@ class EntityConfiguration
 
             $validated_fields[$field['name']] = $field;
         }
-print_r($validated_fields);
+//print_r($validated_fields);
         return $validated_fields;
     }
 }
