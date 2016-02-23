@@ -3,6 +3,7 @@
 namespace BackTo95\Fields\Entity;
 
 use Exception;
+use Zend\Config\Config;
 
 class EntityConfiguration
 {
@@ -12,19 +13,20 @@ class EntityConfiguration
     /** @var string Description of the entity */
     protected $description;
 
-    /** @var  array List of fields attached to the entity */
+    /** @var Config List of fields attached to the entity */
     protected $fields;
 
     public function __construct(array $options = [])
     {
-        $this->setOptions($options);
+        $config = new Config($options, true);
+        $this->setOptions($config);
     }
 
     public function getArrayCopy() : array
     {
         $array = [
             'name' => $this->getName(),
-            'fields' => $this->fields,
+            'fields' => $this->fields->toArray(),
         ];
 
         if ($this->getDescription() != '') {
@@ -62,7 +64,7 @@ class EntityConfiguration
      */
     public function hasField(string $name) : bool
     {
-        return isset($this->fields[$name]);
+        return $this->fields->offsetExists($name);
     }
 
     /**
@@ -80,10 +82,10 @@ class EntityConfiguration
     /**
      * Set entity fields
      *
-     * @param array $fields Fields
+     * @param Config $fields Fields
      * @return EntityConfiguration
      */
-    public function setFields(array $fields) : self
+    public function setFields(Config $fields) : self
     {
         $this->fields = $this->validateFields($fields);
         return $this;
@@ -104,48 +106,48 @@ class EntityConfiguration
     /**
      * Set options
      *
-     * @param array $options Options
+     * @param Config $options Options
      */
-    protected function setOptions(array $options = [])
+    protected function setOptions(Config $options)
     {
-        if (isset($options['name'])) {
-            $this->setName($options['name']);
+        if ($options->offsetExists('name')) {
+            $this->setName($options->get('name'));
         }
 
-        if (isset($options['description'])) {
-            $this->setDescription($options['description']);
+        if ($options->offsetExists('description')) {
+            $this->setDescription($options->get('description'));
         }
 
-        if (isset($options['fields']) && is_array($options['fields'])) {
-            $this->setFields($options['fields']);
+        if ($options->offsetExists('fields')) {
+            $this->setFields($options->get('fields'));
         }
     }
 
     /**
      * Validate fields and their data
      *
-     * @param array $fields Fields
-     * @return array Validated fields
+     * @param Config $fields Fields
+     * @return Config Validated fields
      * @throws Exception
      */
-    protected function validateFields(array $fields) : array
+    protected function validateFields(Config $fields) : Config
     {
-        $validated_fields = [];
         $valid_field_attributes = ['name', 'required', 'form', 'multivalue'];
 
+        /** @var Config $field */
         foreach ($fields as $field) {
-            if (!isset($field['name'])) {
+            if (!$field->offsetExists('name')) {
                 throw new Exception("Name is mandatory attribute for a field!");
             }
 
             foreach ($field as $attribute => $value) {
                 if (!in_array($attribute, $valid_field_attributes)) {
-                    throw new Exception(sprintf("Field attribute %s is not valid!", $attribute));
+                    throw new Exception(sprintf("Field base attribute %s is not valid!", $attribute));
                 }
 
                 switch ($attribute) {
                     case 'required':
-                        $field[$attribute] = (int) $value;
+                        $field->offsetSet($attribute, (int) $value);
                         if ($value !== 1) {
                             throw new Exception(sprintf("Only valid values for required is 1, value of '%s' (%s) was given.", $value, gettype($value)));
                         }
@@ -154,10 +156,10 @@ class EntityConfiguration
                 }
                 // TODO check if attribute has a validator?
             }
-
-            $validated_fields[$field['name']] = $field;
         }
-//print_r($validated_fields);
-        return $validated_fields;
+
+        $fields->setReadOnly();
+
+        return $fields;
     }
 }

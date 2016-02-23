@@ -3,7 +3,8 @@
     "description": "CRUD Fields API for PHP7",
     "type": "library",
     "require": {
-        "php": "^7.0"
+        "php": "^7.0",
+        "zendframework/zend-config": "2.*"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.2"

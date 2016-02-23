@@ -56,11 +56,18 @@ trait ExampleEntityConfigurationTrait
         return new EntityConfiguration($this->example_data);
     }
 
-    protected function getInvalidExampleConfiguration()
+    protected function getInvalidExampleConfigurationNoName()
     {
         $data = $this->example_data;
         unset($data['fields']['genre']['name']);
         $data['fields']['genre']['required'] = 2;
+        return new EntityConfiguration($data);
+    }
+
+    protected function getInvalidExampleConfigurationNotValidAttribute()
+    {
+        $data = $this->example_data;
+        $data['fields']['genre']['foo'] = 'bar';
         return new EntityConfiguration($data);
     }
 }
