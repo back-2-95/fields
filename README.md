@@ -4,17 +4,18 @@ Generic Field API for PHP7.
 This library handles only the metadata about entities and fields related to them.
 
 
-![Travis CI](https://travis-ci.org/back-2-95/fields.svg?branch=master)
+![Travis CI](//travis-ci.org/back-2-95/fields.svg?branch=master)
+[![PHP version](https://badge.fury.io/ph/back-2-95%2Ffields.svg)](//badge.fury.io/ph/back-2-95%2Ffields)
 
-
-![Graph](https://www.gliffy.com/go/publish/image/10111373/M.png)
+![Graph](//www.gliffy.com/go/publish/image/10111373/M.png)
 
 ## TODO
 
 I'll keep this todo list on top until the library is usable.
 
-- Validate and force field data structure. Now they are just arrays of anything.
+- Validate and force field data structure. Now they are just arrays of anything. (IN PROGRESS)
 - In that structure, try to separate general, form and display related data.
+- Implementation example (own repo) e.g. application which uses fields api, mongodb storage and zf2 classes
 
 ## API
 
