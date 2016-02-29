@@ -6,6 +6,9 @@ This library handles only the metadata about entities and fields related to them
 
 ![Travis CI](https://travis-ci.org/back-2-95/fields.svg?branch=master)
 
+
+![Graph](https://www.gliffy.com/go/publish/image/10111373/M.png)
+
 ## TODO
 
 I'll keep this todo list on top until the library is usable.
