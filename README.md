@@ -4,10 +4,10 @@ Generic Field API for PHP7.
 This library handles only the metadata about entities and fields related to them.
 
 
-![Travis CI](//travis-ci.org/back-2-95/fields.svg?branch=master)
-[![PHP version](https://badge.fury.io/ph/back-2-95%2Ffields.svg)](//badge.fury.io/ph/back-2-95%2Ffields)
+![Travis CI](https://travis-ci.org/back-2-95/fields.svg?branch=master)
+[![PHP version](https://badge.fury.io/ph/back-2-95%2Ffields.svg)](https://badge.fury.io/ph/back-2-95%2Ffields)
 
-![Graph](//www.gliffy.com/go/publish/image/10111373/M.png)
+![Graph](https://www.gliffy.com/go/publish/image/10111373/M.png)
 
 ## TODO
 
