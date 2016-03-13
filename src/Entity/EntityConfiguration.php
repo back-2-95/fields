@@ -47,6 +47,16 @@ class EntityConfiguration
     }
 
     /**
+     * Get entity fields
+     *
+     * @return \Zend\Config\Config
+     */
+    public function getFields() : Config
+    {
+        return $this->fields;
+    }
+
+    /**
      * Get entity name
      *
      * @return string
